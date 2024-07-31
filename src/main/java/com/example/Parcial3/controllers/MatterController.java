@@ -19,37 +19,31 @@ public class MatterController {
 
     @GetMapping
     public ResponseEntity<List<Matter>> getAllMatters() {
-        try {
-            List<Matter> matters = matterService.getAllMatters();
-            return ResponseEntity.ok(matters);
-        } catch (Exception e) {
-            // Log the exception (optional)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+        List<Matter> matters = matterService.findAll();
+        return ResponseEntity.ok(matters);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Matter> getMatterById(@PathVariable Integer id) {
-        try {
-            return matterService.getMatterById(id)
-                    .map(ResponseEntity::ok)
-                    .orElse(ResponseEntity.notFound().build());
-        } catch (NoSuchElementException e) {
-            // Log the exception (optional)
+        Matter matter = matterService.findById(id);
+        if (matter != null) {
+            return ResponseEntity.ok(matter);
+        } else {
             return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            // Log the exception (optional)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @PostMapping
-    public ResponseEntity<Matter> createMatter(@RequestBody Matter matter) {
+    @PostMapping("/{idPractice}")
+    public ResponseEntity<Matter> createMatter(@PathVariable Integer idPractice, @RequestBody Matter matter) {
         try {
-            Matter savedMatter = matterService.saveMatter(matter);
-            return ResponseEntity.status(HttpStatus.CREATED).body(savedMatter);
+            Matter savedMatter = matterService.save(matter, idPractice);
+            if (savedMatter != null) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(savedMatter);
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
         } catch (Exception e) {
-            // Log the exception (optional)
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
@@ -57,28 +51,31 @@ public class MatterController {
     @PutMapping("/{id}")
     public ResponseEntity<Matter> updateMatter(@PathVariable Integer id, @RequestBody Matter matterDetails) {
         try {
-            Matter updatedMatter = matterService.updateMatter(id, matterDetails);
-            return ResponseEntity.ok(updatedMatter);
-        } catch (NoSuchElementException e) {
-            // Log the exception (optional)
-            return ResponseEntity.notFound().build();
+            Matter updatedMatter = matterService.update(id, matterDetails);
+            if (updatedMatter != null) {
+                return ResponseEntity.ok(updatedMatter);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
         } catch (Exception e) {
-            // Log the exception (optional)
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMatter(@PathVariable Integer id) {
-        try {
-            matterService.deleteMatter(id);
+        boolean deleted = matterService.delete(id);
+        if (deleted) {
             return ResponseEntity.noContent().build();
-        } catch (NoSuchElementException e) {
-            // Log the exception (optional)
+        } else {
             return ResponseEntity.notFound().build();
-        } catch (Exception e) {
-            // Log the exception (optional)
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/practice/{practiceId}")
+    public ResponseEntity<List<Matter>> getMattersByPracticeId(@PathVariable Integer practiceId) {
+        List<Matter> matters = matterService.findAllByPracticeId(practiceId);
+        return ResponseEntity.ok(matters);
     }
 }

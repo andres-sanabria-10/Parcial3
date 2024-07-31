@@ -1,6 +1,8 @@
 package com.example.Parcial3.services;
 
 import com.example.Parcial3.model.Matter;
+import com.example.Parcial3.model.Practice;
+import com.example.Parcial3.repositories.PracticeRepository;
 import com.example.Parcial3.repositories.MatterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,36 +13,54 @@ import java.util.Optional;
 @Service
 public class MatterService {
 
-    @Autowired
-    private MatterRepository matterRepository;
+    private final MatterRepository matterRepository;
+    private final PracticeRepository practiceRepository;
 
-    public List<Matter> getAllMatters() {
+    @Autowired
+    public MatterService(MatterRepository matterRepository, PracticeRepository practiceRepository) {
+        this.matterRepository = matterRepository;
+        this.practiceRepository = practiceRepository;
+    }
+
+    public List<Matter> findAll() {
         return matterRepository.findAll();
     }
 
-    public Optional<Matter> getMatterById(Integer id) {
-        return matterRepository.findById(id);
+    public Matter findById(Integer id) {
+        return matterRepository.findById(id).orElse(null);
     }
 
-    public Matter saveMatter(Matter matter) {
-        return matterRepository.save(matter);
-    }
-
-    public void deleteMatter(Integer id) {
-        matterRepository.deleteById(id);
-    }
-
-    public Matter updateMatter(Integer id, Matter matterDetails) {
-        Matter matter = matterRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Matter not found with id: " + id));
-
-        matter.setName(matterDetails.getName());
-        matter.setNumCredit(matterDetails.getNumCredit());
-        // Actualiza la práctica si es necesario
-        if (matterDetails.getPractice() != null) {
-            matter.setPractice(matterDetails.getPractice());
+    public Matter save(Matter matter, Integer idPractice) {
+        Optional<Practice> optionalPractice = practiceRepository.findById(idPractice);
+        if (optionalPractice.isPresent()) {
+            Practice practice = optionalPractice.get();
+            matter.setPractice(practice);
+            return matterRepository.save(matter);
         }
+        return null;
+    }
 
-        return matterRepository.save(matter);
+    public Matter update(Integer id, Matter matterDetails) {
+        Optional<Matter> optionalMatter = matterRepository.findById(id);
+        if (optionalMatter.isPresent()) {
+            Matter existingMatter = optionalMatter.get();
+            existingMatter.setName(matterDetails.getName());
+
+            // No actualizamos la práctica aquí, asumiendo que no cambia
+            return matterRepository.save(existingMatter);
+        }
+        return null;
+    }
+
+    public boolean delete(Integer id) {
+        if (matterRepository.existsById(id)) {
+            matterRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Matter> findAllByPracticeId(Integer practiceId) {
+        return matterRepository.findByPracticeId(practiceId);
     }
 }
