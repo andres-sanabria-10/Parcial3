@@ -13,16 +13,4 @@ import java.util.List;
 public interface Academic_semesterRepository extends JpaRepository<Academic_semester, Integer> {
 
 
-    @Query("SELECT as.name as semesterName, m.name as matterName, " +
-            "t.name as teacherName, t.lastName as teacherLastName, " +
-            "p.startDate, p.endDate, p.location " +
-            "FROM Academic_semester as " +
-            "JOIN as.matter m " +
-            "JOIN as.teacher t " +
-            "JOIN m.practice p " +
-            "WHERE as.id = :semesterId")
-    static List<Object[]> findPracticesSummaryBySemester(@Param("semesterId") Integer semesterId) {
-        return null;
-    }
-
 }

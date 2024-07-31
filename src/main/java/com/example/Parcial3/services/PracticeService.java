@@ -42,18 +42,6 @@ public class PracticeService {
         return practiceRepository.findStudentsByPracticeId(practiceId);
     }
 
-    public List<Map<String, Object>> getPracticesSummaryBySemester(Integer semesterId) {
-        List<Object[]> results = Academic_semesterRepository.findPracticesSummaryBySemester(semesterId);
-
-        return results.stream().map(row -> Map.of(
-                "semesterName", row[0],
-                "matterName", row[1],
-                "teacherName", row[2] + " " + row[3], // Combinamos nombre y apellido del profesor
-                "startDate", row[4],
-                "endDate", row[5],
-                "location", row[6]
-        )).collect(Collectors.toList());
-    }
 
     public Practice updatePractice(Integer id, Practice practiceDetails) {
         Optional<Practice> practice = practiceRepository.findById(id);
