@@ -20,8 +20,7 @@ public class Teacher  implements Serializable {
     @Column(nullable = false, length = 40)
     private String Code;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    private List<Academic_semester> academic_semesters;
+
 
 
 
@@ -44,13 +43,7 @@ public class Teacher  implements Serializable {
         Code = code;
     }
 
-    public List<Academic_semester> getAcademic_semesters() {
-        return academic_semesters;
-    }
 
-    public void setAcademic_semesters(List<Academic_semester> academic_semesters) {
-        this.academic_semesters = academic_semesters;
-    }
 
     public Integer getId() {
         return id;

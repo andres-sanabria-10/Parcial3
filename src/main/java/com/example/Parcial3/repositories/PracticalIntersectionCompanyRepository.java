@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import  com.example.Parcial3.model.PracticalIntersectionCompany;
 
- import java.util.List;
+import java.util.List;
 
 @Repository
 public interface PracticalIntersectionCompanyRepository extends JpaRepository<PracticalIntersectionCompany, Integer> {

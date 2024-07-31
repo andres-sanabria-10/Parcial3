@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 public class PracticalIntersectionCompany implements Serializable {
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 

@@ -20,11 +20,10 @@ public class Practice implements Serializable {
     @Column(nullable = false,length =50)
     private String location;
 
-    @OneToMany(mappedBy = "practice")
-    private List<PracticalIntersectionCompany> practicalIntersectionCompanies;
 
-    @OneToMany(mappedBy = "practice")
-    private List<Matter> matterList;
+
+
+
 
     public Practice() {
 
@@ -35,22 +34,6 @@ public class Practice implements Serializable {
         this.startDate = startDate;
         this.endDate = endDate;
         this.location = location;
-    }
-
-    public List<PracticalIntersectionCompany> getPracticalIntersectionCompanies() {
-        return practicalIntersectionCompanies;
-    }
-
-    public void setPracticalIntersectionCompanies(List<PracticalIntersectionCompany> practicalIntersectionCompanies) {
-        this.practicalIntersectionCompanies = practicalIntersectionCompanies;
-    }
-
-    public List<Matter> getMatterList() {
-        return matterList;
-    }
-
-    public void setMatterList(List<Matter> matterList) {
-        this.matterList = matterList;
     }
 
     public Integer getId() {
