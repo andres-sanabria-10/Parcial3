@@ -19,6 +19,9 @@ public class Student  implements Serializable {
     @Column(nullable = false, length = 40)
     private String Code;
 
+   @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+   private List<Academic_semester> academic_semesters;
+
     public Student() {
     }
 

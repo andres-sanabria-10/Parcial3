@@ -1,6 +1,7 @@
 package com.example.Parcial3.model;
 import jakarta.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 public class Matter implements Serializable {
@@ -15,6 +16,12 @@ public class Matter implements Serializable {
 
     @Column(nullable = false, length = 40)
     private String NumCredit;
+
+
+    @OneToMany(mappedBy = "matter", cascade = CascadeType.ALL)
+    private List<Academic_semester> academic_semesters;
+
+
 
 
     public Matter() {

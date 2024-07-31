@@ -16,6 +16,9 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 50)
     private int nit;
 
+    @OneToMany()
+    private List<PracticalIntersectionCompany> practicaInter;
+
     public Company() {
 
     }

@@ -2,6 +2,7 @@ package com.example.Parcial3.model;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 public class Practice implements Serializable {
 
@@ -17,6 +18,9 @@ public class Practice implements Serializable {
 
     @Column(nullable = false,length =50)
     private String location;
+
+    @OneToMany()
+    private List<Matter> MatterList;
 
     public Practice(Integer id) {
 

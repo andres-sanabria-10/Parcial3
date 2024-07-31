@@ -20,6 +20,12 @@ public class Teacher  implements Serializable {
     @Column(nullable = false, length = 40)
     private String Code;
 
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
+    private List<Academic_semester> academic_semesters;
+
+
+
+
 
 
 
