@@ -18,8 +18,9 @@ public class PracticalIntersectionCompany implements Serializable {
     @JoinColumn(name = "company_id")
     private Company company;
 
-    @OneToMany(mappedBy = "practicalIntersectionCompany")
-    private List<Practice> practicaInter;
+    @ManyToOne
+    @JoinColumn(name = "practice_id")
+    private Practice practice;
 
     public PracticalIntersectionCompany() {
     }
@@ -43,5 +44,21 @@ public class PracticalIntersectionCompany implements Serializable {
 
     public void setDate(LocalDate date) {
         Date = date;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
+    public Practice getPractice() {
+        return practice;
+    }
+
+    public void setPractice(Practice practice) {
+        this.practice = practice;
     }
 }

@@ -38,6 +38,21 @@ public class Matter implements Serializable {
         NumCredit = numCredit;
     }
 
+    public List<Academic_semester> getAcademic_semesters() {
+        return academic_semesters;
+    }
+
+    public void setAcademic_semesters(List<Academic_semester> academic_semesters) {
+        this.academic_semesters = academic_semesters;
+    }
+
+    public Practice getPractice() {
+        return practice;
+    }
+
+    public void setPractice(Practice practice) {
+        this.practice = practice;
+    }
 
     public Integer getId() {
         return id;

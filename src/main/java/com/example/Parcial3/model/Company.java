@@ -29,6 +29,14 @@ public class Company implements Serializable {
         this.nit = nit;
     }
 
+    public List<PracticalIntersectionCompany> getPracticaInter() {
+        return practicaInter;
+    }
+
+    public void setPracticaInter(List<PracticalIntersectionCompany> practicaInter) {
+        this.practicaInter = practicaInter;
+    }
+
     public Integer getId() {
         return id;
     }

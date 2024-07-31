@@ -38,6 +38,30 @@ public class Academic_semester implements Serializable {
         this.name = name;
     }
 
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Matter getMatter() {
+        return matter;
+    }
+
+    public void setMatter(Matter matter) {
+        this.matter = matter;
+    }
+
     public String getName() {
         return name;
     }

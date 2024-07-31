@@ -32,6 +32,14 @@ public class Student  implements Serializable {
         Code = code;
     }
 
+    public List<Academic_semester> getAcademic_semesters() {
+        return academic_semesters;
+    }
+
+    public void setAcademic_semesters(List<Academic_semester> academic_semesters) {
+        this.academic_semesters = academic_semesters;
+    }
+
     public Integer getId() {
         return id;
     }
