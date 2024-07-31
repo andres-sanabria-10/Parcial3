@@ -20,8 +20,12 @@ public class Practice implements Serializable {
     @Column(nullable = false,length =50)
     private String location;
 
-    @OneToMany()
-    private List<Matter> MatterList;
+    @ManyToOne
+    @JoinColumn(name = "practical_intersection_company_id")
+    private PracticalIntersectionCompany practicalIntersectionCompany;
+
+    @OneToMany(mappedBy = "practice")
+    private List<Matter> matterList;
 
     public Practice() {
 

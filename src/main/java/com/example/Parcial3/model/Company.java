@@ -16,7 +16,7 @@ public class Company implements Serializable {
     @Column(nullable = false, length = 50)
     private int nit;
 
-    @OneToMany()
+    @OneToMany(mappedBy = "company")
     private List<PracticalIntersectionCompany> practicaInter;
 
     public Company() {

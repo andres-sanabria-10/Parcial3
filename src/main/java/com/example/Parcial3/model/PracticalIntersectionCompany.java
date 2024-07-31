@@ -14,7 +14,11 @@ public class PracticalIntersectionCompany implements Serializable {
     @Column(nullable = false,length =50)
     private LocalDate Date;
 
-    @OneToMany()
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
+
+    @OneToMany(mappedBy = "practicalIntersectionCompany")
     private List<Practice> practicaInter;
 
     public PracticalIntersectionCompany() {

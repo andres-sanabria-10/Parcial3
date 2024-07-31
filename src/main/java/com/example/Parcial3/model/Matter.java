@@ -21,6 +21,10 @@ public class Matter implements Serializable {
     @OneToMany(mappedBy = "matter", cascade = CascadeType.ALL)
     private List<Academic_semester> academic_semesters;
 
+    @ManyToOne
+    @JoinColumn(name = "practice_id")
+    private Practice practice;
+
 
 
 
