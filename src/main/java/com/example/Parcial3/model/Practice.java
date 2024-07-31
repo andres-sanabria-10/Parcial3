@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 public class Practice implements Serializable {
 
     @Id
@@ -22,7 +23,7 @@ public class Practice implements Serializable {
     @OneToMany()
     private List<Matter> MatterList;
 
-    public Practice(Integer id) {
+    public Practice() {
 
     }
 
