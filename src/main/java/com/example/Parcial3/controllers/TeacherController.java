@@ -1,7 +1,7 @@
 package com.example.Parcial3.controllers;
 
-import com.example.Parcial3.model.Student;
-import com.example.Parcial3.services.StudentService;
+import com.example.Parcial3.model.Teacher;
+import com.example.Parcial3.services.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/students")
-public class StudentController {
+@RequestMapping("/api/teachers")
+public class TeacherController {
 
     @Autowired
-    private StudentService studentService;
+    private TeacherService teacherService;
 
     @GetMapping
-    public ResponseEntity<List<Student>> getAllStudents() {
+    public ResponseEntity<List<Teacher>> getAllTeachers() {
         try {
-            List<Student> students = studentService.getAllStudents();
-            return new ResponseEntity<>(students, HttpStatus.OK);
+            List<Teacher> teachers = teacherService.getAllTeachers();
+            return new ResponseEntity<>(teachers, HttpStatus.OK);
         } catch (Exception e) {
             // Log the exception (optional)
             e.printStackTrace();
@@ -29,10 +29,10 @@ public class StudentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Integer id) {
+    public ResponseEntity<Teacher> getTeacherById(@PathVariable Integer id) {
         try {
-            return studentService.getStudentById(id)
-                    .map(student -> new ResponseEntity<>(student, HttpStatus.OK))
+            return teacherService.getTeacherById(id)
+                    .map(teacher -> new ResponseEntity<>(teacher, HttpStatus.OK))
                     .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
         } catch (Exception e) {
             // Log the exception (optional)
@@ -42,10 +42,10 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+    public ResponseEntity<Teacher> createTeacher(@RequestBody Teacher teacher) {
         try {
-            Student savedStudent = studentService.saveStudent(student);
-            return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
+            Teacher savedTeacher = teacherService.saveTeacher(teacher);
+            return new ResponseEntity<>(savedTeacher, HttpStatus.CREATED);
         } catch (Exception e) {
             // Log the exception (optional)
             e.printStackTrace();
@@ -54,11 +54,11 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Student> updateStudent(@PathVariable Integer id, @RequestBody Student studentDetails) {
+    public ResponseEntity<Teacher> updateTeacher(@PathVariable Integer id, @RequestBody Teacher teacherDetails) {
         try {
-            Student updatedStudent = studentService.updateStudent(id, studentDetails);
-            if (updatedStudent != null) {
-                return new ResponseEntity<>(updatedStudent, HttpStatus.OK);
+            Teacher updatedTeacher = teacherService.updateTeacher(id, teacherDetails);
+            if (updatedTeacher != null) {
+                return new ResponseEntity<>(updatedTeacher, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -70,9 +70,9 @@ public class StudentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteStudent(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteTeacher(@PathVariable Integer id) {
         try {
-            studentService.deleteStudent(id);
+            teacherService.deleteTeacher(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
             // Log the exception (optional)
