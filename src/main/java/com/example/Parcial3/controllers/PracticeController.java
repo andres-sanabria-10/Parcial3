@@ -1,6 +1,7 @@
 package com.example.Parcial3.controllers;
 
 import com.example.Parcial3.model.Practice;
+import com.example.Parcial3.model.Student;
 import com.example.Parcial3.services.PracticeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,6 +32,12 @@ public class PracticeController {
             e.printStackTrace();
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/{practiceId}/students")
+    public ResponseEntity<List<Student>> getStudentsByPracticeId(@PathVariable Integer practiceId) {
+        List<Student> students = practiceService.getStudentsByPracticeId(practiceId);
+        return ResponseEntity.ok(students);
     }
 
     @GetMapping("/{id}")

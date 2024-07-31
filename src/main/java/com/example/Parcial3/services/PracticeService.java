@@ -1,6 +1,7 @@
 package com.example.Parcial3.services;
 
 import com.example.Parcial3.model.Practice;
+import com.example.Parcial3.model.Student;
 import com.example.Parcial3.repositories.PracticeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,10 @@ public class PracticeService {
 
     public void deletePractice(Integer id) {
         practiceRepository.deleteById(id);
+    }
+
+    public List<Student> getStudentsByPracticeId(Integer practiceId) {
+        return practiceRepository.findStudentsByPracticeId(practiceId);
     }
 
     public Practice updatePractice(Integer id, Practice practiceDetails) {
