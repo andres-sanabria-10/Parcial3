@@ -21,6 +21,8 @@ public interface Academic_semesterRepository extends JpaRepository<Academic_seme
             "JOIN as.teacher t " +
             "JOIN m.practice p " +
             "WHERE as.id = :semesterId")
-    static List<Object[]> findPracticesSummaryBySemester(@Param("semesterId") Integer semesterId);
+    static List<Object[]> findPracticesSummaryBySemester(@Param("semesterId") Integer semesterId) {
+        return null;
+    }
 
 }
